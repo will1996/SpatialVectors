@@ -1,0 +1,3 @@
+/Users/willchambers/Projects/astral/src/physics/spatialLibrary/build/CMakeFiles/rebuild_cache.dir
+/Users/willchambers/Projects/astral/src/physics/spatialLibrary/build/CMakeFiles/edit_cache.dir
+/Users/willchambers/Projects/astral/src/physics/spatialLibrary/build/CMakeFiles/spatialVector.dir
