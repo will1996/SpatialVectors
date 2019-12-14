@@ -1,4 +1,5 @@
 #include<glm/glm.hpp>
+#include<string> 
 
 
 
@@ -19,11 +20,14 @@
 //one for orientation (the corrdinate of the body in rotation space), and 
 //one for position (the coordinate of the body in position space)
 
+//finally in the R
 namespace RigidBody{
 
 
 
   class SpatialVector{
+    public: 
+    std::string stringify();      
     private:
       glm::vec3 orientation;
       glm::vec3 position;
@@ -34,6 +38,8 @@ namespace RigidBody{
   //matricies, and so are a collection of four transforms in M3. Here, 
   //they are numbered by coordiantes 00, 01,10,11 
   class SpatialOperator{
+    public: 
+    std::string stringify();      
     private:
     glm::mat3 d_00;
     glm::mat3 d_01;
@@ -44,13 +50,35 @@ namespace RigidBody{
   //glm::vec3's
   class PlanarVector: public glm::vec3{
     
+    public: 
+    std::string stringify();      
   };
   //since Planar Operators are defined in M3, PlanarOperators are a wrapper
   //for glm::mat3's 
   class PlanarOperator: public glm::mat3{
+    public: 
+    std::string stringify();      
     };
 
-
-
-
+    //Spatial Vector arithmetic Operators
+    double operator *(const SpatialVector& lhs, const SpatialVector& rhs);
+    SpatialVector operator *(const double& lhs, const SpatialVector & rhs);
+    SpatialVector operator *( const SpatialVector &lhs, const double & rhs);
+    SpatialVector operator +(const SpatialVector& lhs, const SpatialVector& rhs);
+    SpatialVector operator -(const SpatialVector& lhs, const SpatialVector& rhs);
+    //transformation
+    SpatialOperator operator *( const SpatialOperator &lhs, const SpatialVector & rhs);
+    //scale matrix
+    SpatialOperator operator *( const double &lhs, const SpatialOperator & rhs);
+    //Spatial Operator arithmetic Operators 
+    SpatialOperator operator +( const SpatialOperator &lhs, const SpatialOperator & rhs);
+    SpatialOperator operator -( const SpatialOperator &lhs, const SpatialOperator & rhs);
+    SpatialOperator operator *( const SpatialOperator &lhs, const SpatialOperator & rhs);
+    
+    //Linear algebra operations
+    SpatialOperator Inverse( const SpatialOperator &arg);
+    SpatialOperator Det( const SpatialOperator &arg);
+    SpatialOperator Transpose( const SpatialOperator &arg);
+    //Spatial Operator indexing operators
+    
 };
